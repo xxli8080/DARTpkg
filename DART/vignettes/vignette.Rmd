@@ -28,8 +28,8 @@ The sample data we used to analysis is from a microbiome study with $n=456$ samp
 # Setting up tuning parameters. Please refer to the paper for detailed tuning parameter selection procedure.
 n <- 456
 m <- 857
-grids <- c(16,16)/sqrt(n*log(m)*log(log(m)))
-Mgroup <- floor(log(m/35,3))
+grids <- c(16)/sqrt(n*log(m)*log(log(m)))
+Mgroup <- 3
 
 # Stage 1: build aggregation tree
 Atree <- A.tree.mult(grids=grids,Mgroup = Mgroup, Dist0 = Dist0)

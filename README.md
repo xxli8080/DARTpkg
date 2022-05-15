@@ -5,6 +5,7 @@ DART package
 ## Installation guidance
 In R, run the following block of codes:
 
+
 remotes::install_github(
   repo = "xxli8080/DARTpkg",
   subdir = "DART",
@@ -13,4 +14,4 @@ remotes::install_github(
 
 
 
-A tutorial of this package can be found in this repository under CDI/vignettes/
+A tutorial of this package can be found in this repository under DART/vignettes/
