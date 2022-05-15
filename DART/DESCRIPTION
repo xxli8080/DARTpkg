@@ -1,0 +1,23 @@
+Package: DART
+Title: Distance assisted recursive testing
+Version: 0.1
+Authors@R: c(person("Xuechan", "Li", email = "xuechan.li@duke.edu", role = c("aut", "cre")),
+             person("Jichun", "Xie", email = "jichuan.xie@duke.edu", role = c("ctb")))
+Description: R package for conducting distance assisted recursive multiple testing.
+License: GPL-3
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2.9000
+Imports: 
+    ape,
+    cubature,
+    qlcMatrix,
+    stats,
+    xtable
+Depends: 
+    R (>= 2.10)
+LazyData: true
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

@@ -1,0 +1,42 @@
+---
+title: "Vignette"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+The `DART` package accompanies the paper "DART: distance assisted recursive testing" (arXiv link: https://arxiv.org/abs/2103.11085). It is designed to conduct powerful multiple testing under the assumption that hypotheses lies in a metric space with know distance matrix, which partially inform the co-null/co-alternative status.
+
+```{r setup}
+library(DART)
+```
+Here, we show how to apply `DART` based the P-values and distance matrix.
+\par
+The sample data we used to analysis is from a microbiome study with $n=456$ samples and $m=857$  amplicon sequence variants (ASVs). Each ASV can be viewed as a testing unit and links to a hypothesis. Based on preprocessing process, we can get the distance matrix among the $m=857$ ASVs (`Dist0`) and a vector of p-values links to each hypotheses (`pvals`). Please refer to the paper for the in depth information (e.g. data preprocess, hypotheses set up, tuning parameter selection, etc.) about the data analysis.
+
+
+```{r}
+# Setting up tuning parameters. Please refer to the paper for detailed tuning parameter selection procedure.
+n <- 456
+m <- 857
+grids <- c(16,16)/sqrt(n*log(m)*log(log(m)))
+Mgroup <- floor(log(m/35,3))
+
+# Stage 1: build aggregation tree
+Atree <- A.tree.mult(grids=grids,Mgroup = Mgroup, Dist0 = Dist0)
+# Stage 2: Embed multiple testing in the aggregation tree
+Test.result <- test.mult(alpha=0.05,Llist=Atree$Llist,Dist0=Dist0,T1=t(qnorm(pvals,lower.tail=FALSE)))
+
+Test.result
+
+```
+
